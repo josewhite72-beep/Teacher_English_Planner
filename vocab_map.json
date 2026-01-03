@@ -1,0 +1,782 @@
+{
+  "Meeting New Friends|This Is Me!": [
+    "hello",
+    "name",
+    "friend",
+    "boy",
+    "girl",
+    "student",
+    "teacher"
+  ],
+  "Meeting New Friends|My Family": [
+    "mother",
+    "father",
+    "sister",
+    "brother",
+    "family",
+    "home",
+    "baby"
+  ],
+  "It's a School Day!|Let's Listen!": [
+    "listen",
+    "repeat",
+    "quiet",
+    "voice",
+    "song",
+    "class"
+  ],
+  "It's a School Day!|Stand Up!": [
+    "stand",
+    "sit",
+    "walk",
+    "line",
+    "turn",
+    "stop"
+  ],
+  "All Week Long!|Today Is Tuesday!": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "week",
+    "day"
+  ],
+  "All Week Long!|It's the Weekend.": [
+    "Saturday",
+    "Sunday",
+    "weekend",
+    "play",
+    "rest",
+    "home"
+  ],
+  "School Days|I'm at School.": [
+    "school",
+    "classroom",
+    "desk",
+    "board",
+    "clock",
+    "teacher",
+    "student"
+  ],
+  "School Days|I'm at the Market.": [
+    "market",
+    "shop",
+    "fruit",
+    "vegetable",
+    "money",
+    "buy",
+    "sell"
+  ],
+  "Places I Can Go|This Is My Favorite.": [
+    "park",
+    "river",
+    "farm",
+    "library",
+    "clinic",
+    "favorite",
+    "best"
+  ],
+  "Places I Can Go|It's the Best!": [
+    "place",
+    "best",
+    "fun",
+    "near",
+    "far",
+    "map"
+  ],
+  "Following Instructions at School|First, I Cut the Paper.": [
+    "cut",
+    "paper",
+    "scissors",
+    "glue",
+    "craft",
+    "first"
+  ],
+  "Following Instructions at School|Let's Make a Poster!": [
+    "poster",
+    "draw",
+    "color",
+    "write",
+    "title",
+    "team"
+  ],
+  "Me and My Family|Hold Up 10 Fingers!": [
+    "one",
+    "two",
+    "three",
+    "numbers",
+    "count",
+    "fingers"
+  ],
+  "Me and My Family|Colors in Our World": [
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "orange",
+    "purple",
+    "color"
+  ],
+  "All About the Weather|A Perfect Day!": [
+    "sunny",
+    "rainy",
+    "cloudy",
+    "windy",
+    "hot",
+    "cold",
+    "weather"
+  ],
+  "All About the Weather|Dress for the Weather.": [
+    "coat",
+    "hat",
+    "boots",
+    "umbrella",
+    "shorts",
+    "t-shirt",
+    "dress"
+  ],
+  "Discovering Our Classroom|What's in Your Bag?": [
+    "bag",
+    "pencil",
+    "pen",
+    "eraser",
+    "ruler",
+    "notebook"
+  ],
+  "Discovering Our Classroom|The Book Is on the Table.": [
+    "book",
+    "table",
+    "chair",
+    "under",
+    "on",
+    "next to"
+  ],
+  "Shopping at the Market|How Much Is the Pineapple?": [
+    "pineapple",
+    "banana",
+    "papaya",
+    "price",
+    "money",
+    "how much"
+  ],
+  "Shopping at the Market|I Need Two Papayas, Please?": [
+    "need",
+    "please",
+    "two",
+    "buy",
+    "seller",
+    "customer"
+  ],
+  "The Local Farm Stand|How Much Are the Bananas?": [
+    "farm",
+    "stand",
+    "bananas",
+    "fresh",
+    "basket",
+    "weigh"
+  ],
+  "The Local Farm Stand|I Need a Lot of Books!": [
+    "library",
+    "books",
+    "many",
+    "few",
+    "borrow",
+    "return"
+  ],
+  "In the Library|How do I find a book in the library?": [
+    "library",
+    "shelf",
+    "author",
+    "title",
+    "search",
+    "borrow"
+  ],
+  "In the Library|My Favorite Legend": [
+    "legend",
+    "story",
+    "hero",
+    "dragon",
+    "once",
+    "time"
+  ],
+  "Legends of Panama|Once upon a Time…": [
+    "once",
+    "upon",
+    "time",
+    "character",
+    "setting",
+    "plot"
+  ],
+  "Legends of Panama|My Favorite Movie Is... Because...": [
+    "movie",
+    "favorite",
+    "because",
+    "actor",
+    "scene",
+    "review"
+  ],
+  "Renewable Energy in Panama|What Is Renewable Energy?": [
+    "energy",
+    "renewable",
+    "solar",
+    "wind",
+    "water",
+    "power"
+  ],
+  "Renewable Energy in Panama|Why Is Renewable Energy Important for Panama?": [
+    "important",
+    "Panama",
+    "electricity",
+    "save",
+    "environment",
+    "future"
+  ],
+  "Study Habits for Success|Learning to Manage Time": [
+    "time",
+    "schedule",
+    "plan",
+    "study",
+    "homework",
+    "break"
+  ],
+  "Study Habits for Success|How I Learned to Focus": [
+    "focus",
+    "quiet",
+    "goal",
+    "task",
+    "practice",
+    "repeat"
+  ],
+  "Managing Stress in Changing Times|Breathing to Relax": [
+    "breathe",
+    "relax",
+    "calm",
+    "slow",
+    "count",
+    "peace"
+  ],
+  "Managing Stress in Changing Times|Forest Bathing and Other Biohacks": [
+    "forest",
+    "trees",
+    "nature",
+    "walk",
+    "listen",
+    "smell"
+  ],
+  "A Walk in the Neighborhood|Places I Can Go": [
+    "market",
+    "school",
+    "river",
+    "farm",
+    "library",
+    "clinic",
+    "park",
+    "bridge"
+  ],
+  "A Walk in the Neighborhood|A Trip to the Beach": [
+    "beach",
+    "sand",
+    "sea",
+    "shell",
+    "swim",
+    "sun"
+  ],
+  "Exploring My Community|Let's Go Shopping!": [
+    "shopping",
+    "store",
+    "cashier",
+    "bag",
+    "receipt",
+    "queue"
+  ],
+  "Exploring My Community|Time for Exercise": [
+    "exercise",
+    "run",
+    "jump",
+    "stretch",
+    "strong",
+    "healthy"
+  ],
+  "Our Amazing Community|The Town Square": [
+    "square",
+    "statue",
+    "fountain",
+    "bench",
+    "event",
+    "festival"
+  ],
+  "Our Amazing Community|Career Goals": [
+    "job",
+    "work",
+    "goal",
+    "dream",
+    "skill",
+    "learn"
+  ],
+  "Transportation in Panama|Where Is It?": [
+    "bus",
+    "taxi",
+    "boat",
+    "train",
+    "map",
+    "route"
+  ],
+  "Transportation in Panama|Planning for a Friend's Visit": [
+    "visit",
+    "plan",
+    "meet",
+    "time",
+    "place",
+    "welcome"
+  ],
+  "Panama's Role in the World|International Communication": [
+    "country",
+    "flag",
+    "language",
+    "hello",
+    "world",
+    "share"
+  ],
+  "Panama's Role in the World|Exploring Our Global Community": [
+    "global",
+    "community",
+    "culture",
+    "travel",
+    "tradition",
+    "friend"
+  ],
+  "Numbers Around Me|Let's Count to Five!": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "count"
+  ],
+  "Numbers Around Me|How Many?": [
+    "many",
+    "few",
+    "more",
+    "less",
+    "how many",
+    "total"
+  ],
+  "What's that Sound?|The Cat Says \"Meow\".": [
+    "cat",
+    "dog",
+    "bird",
+    "sound",
+    "meow",
+    "bark"
+  ],
+  "What's that Sound?|That's a Rooster!": [
+    "rooster",
+    "chicken",
+    "cow",
+    "duck",
+    "cluck",
+    "moo"
+  ],
+  "Colors of Things that Go|That's a Blue Bus.": [
+    "blue",
+    "red",
+    "yellow",
+    "bus",
+    "car",
+    "bike"
+  ],
+  "Colors of Things that Go|That's a Red Bike. Because...": [
+    "red",
+    "bike",
+    "fast",
+    "slow",
+    "because",
+    "helmet"
+  ],
+  "Exploring Our Classroom|Things in My Classroom": [
+    "desk",
+    "board",
+    "marker",
+    "book",
+    "backpack",
+    "floor"
+  ],
+  "Exploring Our Classroom|Colors in My Classroom": [
+    "color",
+    "white",
+    "black",
+    "brown",
+    "pink",
+    "gray"
+  ],
+  "Our Routines|First, I Sit Down.": [
+    "first",
+    "next",
+    "then",
+    "finally",
+    "sit",
+    "stand"
+  ],
+  "Our Routines|Pick It Up!": [
+    "pick",
+    "up",
+    "clean",
+    "tidy",
+    "organize",
+    "trash"
+  ],
+  "Nice Weather Today!|It's Sunny!": [
+    "sunny",
+    "hot",
+    "shade",
+    "hat",
+    "water",
+    "stay"
+  ],
+  "Nice Weather Today!|It's Raining.": [
+    "rain",
+    "wet",
+    "umbrella",
+    "boots",
+    "coat",
+    "storm"
+  ],
+  "School Life Adventures|That's a Big Book!": [
+    "big",
+    "small",
+    "heavy",
+    "light",
+    "thick",
+    "thin"
+  ],
+  "School Life Adventures|That's a Small, Brown, Bag.": [
+    "bag",
+    "small",
+    "brown",
+    "carry",
+    "open",
+    "close"
+  ],
+  "A Polite Request|Can I Have a Pencil?": [
+    "please",
+    "thank you",
+    "can",
+    "may",
+    "pencil",
+    "borrow"
+  ],
+  "A Polite Request|Sorry, I Can't Help You.": [
+    "sorry",
+    "can't",
+    "help",
+    "later",
+    "busy",
+    "ask"
+  ],
+  "Helping in the Garden|The Tomatoes Grow Quickly.": [
+    "tomato",
+    "plant",
+    "soil",
+    "grow",
+    "water",
+    "sun"
+  ],
+  "Helping in the Garden|These Plants Are from Panama.": [
+    "native",
+    "Panama",
+    "leaf",
+    "root",
+    "seed",
+    "garden"
+  ],
+  "Taking Care of Our Classroom|We Are Sweeping the Floors.": [
+    "sweep",
+    "broom",
+    "floor",
+    "clean",
+    "dust",
+    "corner"
+  ],
+  "Taking Care of Our Classroom|Let's Arrange the Chairs.": [
+    "arrange",
+    "chair",
+    "row",
+    "circle",
+    "move",
+    "space"
+  ],
+  "Keeping Our Communities Clean|We Should Clean the Classroom on Friday.": [
+    "should",
+    "plan",
+    "Friday",
+    "clean",
+    "team",
+    "task"
+  ],
+  "Keeping Our Communities Clean|Who Will Bring the Cleaning Supplies?": [
+    "bring",
+    "supplies",
+    "soap",
+    "cloth",
+    "bucket",
+    "list"
+  ],
+  "Panama's Wildlife|The Habitat of Wildlife": [
+    "wildlife",
+    "habitat",
+    "forest",
+    "river",
+    "mountain",
+    "protected"
+  ],
+  "Panama's Wildlife|The Daily Habits of Animals": [
+    "daily",
+    "nocturnal",
+    "feed",
+    "sleep",
+    "move",
+    "track"
+  ],
+  "The Power of Education|This Trimester, I Am Learning About...": [
+    "trimester",
+    "learn",
+    "topic",
+    "goal",
+    "project",
+    "practice"
+  ],
+  "The Power of Education|Next Trimester, I Plan to Learn...": [
+    "plan",
+    "next",
+    "improve",
+    "study",
+    "read",
+    "write"
+  ],
+  "Technology in Education|The Use of Technology in School": [
+    "tablet",
+    "computer",
+    "internet",
+    "type",
+    "search",
+    "save"
+  ],
+  "Technology in Education|When It's Better To Ignore Technology": [
+    "limit",
+    "break",
+    "eyes",
+    "sleep",
+    "focus",
+    "balance"
+  ],
+  "Advice for Success|Academic Achievement and Skill Development: How?": [
+    "achievement",
+    "skill",
+    "train",
+    "practice",
+    "feedback",
+    "try"
+  ],
+  "Advice for Success|My Advice for a Ninth Grader Is...": [
+    "advice",
+    "study",
+    "notes",
+    "friends",
+    "teacher",
+    "ask"
+  ],
+  "Our Changing Forests|I Explored the Ecological History Of…": [
+    "history",
+    "ecology",
+    "change",
+    "timeline",
+    "map",
+    "research"
+  ],
+  "Our Changing Forests|Saving for Future Goals!": [
+    "save",
+    "future",
+    "goal",
+    "money",
+    "plan",
+    "keep"
+  ],
+  "A Guide to Panama|Our Historical Sites": [
+    "ruins",
+    "museum",
+    "heritage",
+    "preserve",
+    "site",
+    "history",
+    "tour"
+  ],
+  "A Guide to Panama|Take a Trip to the Panama Canal": [
+    "canal",
+    "lock",
+    "vessel",
+    "route",
+    "engineer",
+    "cargo"
+  ],
+  "Cultural Connections|I Celebrate This Tradition Because...": [
+    "tradition",
+    "celebrate",
+    "festival",
+    "music",
+    "dance",
+    "costume"
+  ],
+  "Cultural Connections|In This Region, They Have a Custom Of...": [
+    "custom",
+    "region",
+    "food",
+    "craft",
+    "story",
+    "share"
+  ],
+  "Our Community News|Reporting From the School!": [
+    "report",
+    "news",
+    "photo",
+    "interview",
+    "headline",
+    "publish"
+  ],
+  "Our Community News|Our Community Is Famous For…": [
+    "famous",
+    "community",
+    "product",
+    "place",
+    "reason",
+    "proud"
+  ],
+  "Let's Start a Club!|There Are So Many Types of Clubs!": [
+    "club",
+    "type",
+    "join",
+    "member",
+    "activity",
+    "rule"
+  ],
+  "Let's Start a Club!|Learning to Manage a Club": [
+    "manage",
+    "role",
+    "leader",
+    "meeting",
+    "plan",
+    "budget"
+  ],
+  "Our Town Council|How Our Town Operates": [
+    "council",
+    "vote",
+    "meeting",
+    "decision",
+    "law",
+    "service"
+  ],
+  "Our Town Council|How We Share Our Voice in the Community": [
+    "voice",
+    "speech",
+    "petition",
+    "survey",
+    "opinion",
+    "support"
+  ],
+  "Supporting Our Community|How Does the Government Support Communities?": [
+    "government",
+    "support",
+    "program",
+    "health",
+    "education",
+    "safety"
+  ],
+  "Supporting Our Community|Volunteering in Our Community": [
+    "volunteer",
+    "help",
+    "donate",
+    "clean",
+    "teach",
+    "organize"
+  ],
+  "Sustainable Living|The Importance of Water": [
+    "water",
+    "clean",
+    "drink",
+    "river",
+    "lake",
+    "well"
+  ],
+  "Sustainable Living|You Can Save Water By...": [
+    "save",
+    "tap",
+    "bucket",
+    "reuse",
+    "collect",
+    "fix"
+  ],
+  "Our Indigenous Heritage|Learning to Research History": [
+    "indigenous",
+    "heritage",
+    "research",
+    "source",
+    "museum",
+    "archive"
+  ],
+  "Our Indigenous Heritage|Preserving Our Heritage": [
+    "preserve",
+    "artifact",
+    "language",
+    "story",
+    "tradition",
+    "protect"
+  ],
+  "International Communication|Introducing Panama to the World": [
+    "Panama",
+    "introduce",
+    "country",
+    "capital",
+    "canal",
+    "culture"
+  ],
+  "International Communication|Communicating Panama's Importance": [
+    "importance",
+    "economy",
+    "trade",
+    "travel",
+    "tourism",
+    "bridge"
+  ],
+  "Robots on Earth and in Space|Advice for a Friend's Visit (Plan)": [
+    "robot",
+    "earth",
+    "space",
+    "visit",
+    "plan",
+    "guide"
+  ],
+  "Robots on Earth and in Space|Technology & Society": [
+    "technology",
+    "society",
+    "impact",
+    "future",
+    "job",
+    "ethics"
+  ],
+  "Career Goals & Planning|Saving for Future Goals!": [
+    "career",
+    "goal",
+    "plan",
+    "save",
+    "budget",
+    "steps"
+  ],
+  "Career Goals & Planning|My Personal Success Story": [
+    "success",
+    "story",
+    "challenge",
+    "effort",
+    "learn",
+    "share"
+  ]
+}
