@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang=\"es\" data-theme=\"dark\">
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <title>Teacher English Planner (PWA) — Dark/Light Toggle</title>
+  <meta name=\"theme-color\" content=\"#0A7AFE\" />
+  <link rel=\"manifest\" href=\"manifest.json\" />
+  <style>
+    :root { --bg:#0b0b0b; --fg:#f0f0f0; --card:#121212; --border:#333; --btn:#0A7AFE; --btn2:#1f2937; --preview:#0f1115; --preview-fg:#e6edf3; }
+    html[data-theme=\"light\"]:root { --bg:#ffffff; --fg:#1f2937; --card:#f7f7f8; --border:#cfd2d6; --btn:#0A7AFE; --btn2:#e5e7eb; --preview:#ffffff; --preview-fg:#111827; }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--fg); margin:0}
+    main{padding:16px; max-width:960px; margin:0 auto}
+    .card{background:var(--card); border-radius:12px; padding:16px; box-shadow:0 2px 10px #0002; margin-bottom:12px}
+    label{display:block; margin:8px 0 4px; font-weight:600}
+    input, select, textarea{width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:transparent; color:inherit}
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{background:var(--btn); color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer}
+    .btn.secondary{background:var(--btn2); color:inherit}
+    .preview{white-space:pre-wrap; background:var(--preview); color:var(--preview-fg); padding:12px; border-radius:10px; overflow:auto; max-height:40vh}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    .toolbar{display:flex; justify-content:space-between; align-items:center}
+  </style>
+</head>
+<body>
+  <main>
+    <section class=\"card\">
+      <div class=\"toolbar\">
+        <div>
+          <h1 style=\"margin:0\">Teacher English Planner (PWA)</h1>
+          <p style=\"margin:4px 0 0\">Exportación embebida (Word/PDF) con **Scope PK–6**, rúbricas, can‑do y functions/grammar.</p>
+        </div>
+        <div>
+          <button id=\"themeToggle\" class=\"btn secondary\" title=\"Cambiar tema\">Modo claro</button>
+        </div>
+      </div>
+    </section>
+
+    <section class=\"card\">
+      <div class=\"grid\">
+        <div>
+          <label>Grade</label>
+          <select id=\"grade\">
+            <option value=\"Pre-K\">Pre-Kinder</option>
+            <option value=\"K\">Kinder</option>
+            <option value=\"1\">Grade 1</option>
+            <option value=\"2\">Grade 2</option>
+            <option value=\"3\" selected>Grade 3</option>
+            <option value=\"4\">Grade 4</option>
+            <option value=\"5\">Grade 5</option>
+            <option value=\"6\">Grade 6</option>
+          </select>
+        </div>
+        <div>
+          <label>Scenario</label>
+          <select id=\"scenario\"></select>
+        </div>
+        <div>
+          <label>Theme</label>
+          <select id=\"theme\"></select>
+        </div>
+      </div>
+      <label style=\"margin-top:12px\">Context</label>
+      <textarea id=\"context\" rows=\"3\" placeholder=\"Grupo de primaria panameña.\"></textarea>
+      <div class=\"actions\" style=\"margin-top:12px\">
+        <button class=\"btn\" id=\"generate\">Generar</button>
+        <button class=\"btn secondary\" id=\"copyBtn\">Copiar Markdown</button>
+        <button class=\"btn secondary\" id=\"downloadBtn\">Descargar .md</button>
+        <button class=\"btn secondary\" id=\"docBtn\">Exportar a Word (.doc)</button>
+        <button class=\"btn secondary\" id=\"pdfBtn\">Exportar a PDF</button>
+      </div>
+    </section>
+
+    <section class=\"card\">
+      <h3>Vista previa</h3>
+      <div id=\"preview\" class=\"preview\"></div>
+      <textarea id=\"output\" class=\"sr-only\" aria-hidden=\"true\"></textarea>
+    </section>
+  </main>
+
+  <script>
+    // Dark/Light toggle with localStorage and meta theme-color update
+    (function(){
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('theme') || 'dark';
+      html.setAttribute('data-theme', saved);
+      btn.textContent = saved==='dark' ? 'Modo claro' : 'Modo oscuro';
+      document.querySelector('meta[name=\"theme-color\"]').setAttribute('content', saved==='dark' ? '#0A7AFE' : '#ffffff');
+      btn.addEventListener('click', ()=>{
+        const current = html.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', current);
+        localStorage.setItem('theme', current);
+        btn.textContent = current==='dark' ? 'Modo claro' : 'Modo oscuro';
+        document.querySelector('meta[name=\"theme-color\"]').setAttribute('content', current==='dark' ? '#0A7AFE' : '#ffffff');
+      });
+    })();
+
+    function refreshPreviewFromOutput(){
+      const md = document.getElementById('output').value || '';
+      const ctx = document.getElementById('context').value.trim();
+      const merged = ctx ? md.replace('\n## Context\n', `\n## Context\n${ctx}\n`) : md;
+      document.getElementById('preview').textContent = merged;
+      return merged;
+    }
+
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      const md = refreshPreviewFromOutput();
+      try{ await navigator.clipboard.writeText(md); alert('Markdown copiado'); }catch(e){ alert('No se pudo copiar'); }
+    });
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const md = refreshPreviewFromOutput();
+      const blob = new Blob([md], {type:'text/markdown'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='teacher_english_planner.md'; a.click(); URL.revokeObjectURL(a.href);
+    });
+
+    function mdToPrintableHtml(md){
+      const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+      const lines = md.split('\n');
+      const body = lines.map(line => {
+        if(line.startsWith('# ')) return `<h1>${esc(line.replace('# ', ''))}</h1>`;
+        if(line.startsWith('## ')) return `<h2>${esc(line.replace('## ', ''))}</h2>`;
+        if(line.startsWith('### ')) return `<h3>${esc(line.replace('### ', ''))}</h3>`;
+        if(line.startsWith('- ')) return `<li>${esc(line.replace('- ', ''))}</li>`;
+        if(line.trim()==='') return '<br/>';
+        return `<p>${esc(line)}</p>`;
+      }).join('\n');
+      const html = `<!DOCTYPE html><html><head><meta charset='utf-8'>\n`+
+        `<title>Teacher English Planner – PDF</title>\n`+
+        `<style> @page{margin:20mm} body{font-family:Calibri,Arial,sans-serif} h1{font-size:18pt} h2{font-size:14pt} h3{font-size:12pt} p,li{font-size:11pt} ul{margin:6px 0 12px 18px} </style>`+
+        `</head><body>${body}</body></html>`;
+      return html;
+    }
+    document.getElementById('pdfBtn').addEventListener('click', ()=>{
+      const md = refreshPreviewFromOutput();
+      const html = mdToPrintableHtml(md);
+      const w = window; w.document.open('text/html','replace'); w.document.write(html); w.document.close(); setTimeout(()=>{ w.print(); }, 250);
+    });
+
+    document.getElementById('generate').addEventListener('click', ()=>{ setTimeout(refreshPreviewFromOutput, 300); });
+  </script>
+
+  <script src=\"md2doc.js\"></script>
+  <script src=\"app.js\"></script>
+  <script>
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js'); }
+  </script>
+</body>
+</html>
