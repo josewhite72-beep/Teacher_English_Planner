@@ -1,127 +1,122 @@
 
-// app.js — Official export integration with preloaded STATE
-const STATE = { grade:'3', scenario:'', theme:'', scope:{}, canDo:{}, funGram:{}, vocabMap:{}, rubrics:{} };
-
-async function loadJSON(url){ const r=await fetch(url); if(!r.ok) throw new Error('Failed '+url); return r.json(); }
-async function initData(){
-  STATE.scope   = await loadJSON('scope_sequence_pk6.json');
-  STATE.canDo   = await loadJSON('can_do_pk6.json');
-  STATE.funGram = await loadJSON('functions_grammar_pk6.json');
-  try { STATE.vocabMap = await loadJSON('vocab_map.json'); } catch(e){ STATE.vocabMap = {}; }
-  try { STATE.rubrics  = await loadJSON('rubrics_pk6.json'); } catch(e){ STATE.rubrics = {}; }
-}
-
-function initSelectors(){
-  const gSel=document.getElementById('grade'), sSel=document.getElementById('scenario'), tSel=document.getElementById('theme');
-  function refreshScenarios(){ sSel.innerHTML=''; tSel.innerHTML=''; const g=gSel.value; Object.keys(STATE.scope[g]||{}).forEach(sc=>{const o=document.createElement('option'); o.value=sc; o.textContent=sc; sSel.appendChild(o);}); refreshThemes(); }
-  function refreshThemes(){ tSel.innerHTML=''; const g=gSel.value, sc=sSel.value; (STATE.scope[g]?.[sc]||[]).forEach(th=>{const o=document.createElement('option'); o.value=th; o.textContent=th; tSel.appendChild(o);}); STATE.grade=g; STATE.scenario=sc; STATE.theme=tSel.value||''; }
-  gSel.addEventListener('change',refreshScenarios); sSel.addEventListener('change',refreshThemes); tSel.addEventListener('change',()=>STATE.theme=tSel.value);
-  refreshScenarios();
-}
-
-function getInstitutionDefaults(){
-  const school = document.getElementById('school').value || localStorage.getItem('school') || 'CEBG Barrigón';
-  const teacher= document.getElementById('teacher').value|| localStorage.getItem('teacher')|| 'José White';
-  const schoolYear=document.getElementById('schoolYear').value|| localStorage.getItem('schoolYear')|| '2026';
-  const term=document.getElementById('term').value|| localStorage.getItem('term')|| '1';
-  return { school, teacher, schoolYear, term };
-}
-
-function buildOutcomes(g){
-  const cd = STATE.canDo[g];
-  if(!cd) return {Listening:'',Speaking:'',Reading:'',Writing:'',Mediation:''};
-  const L = Array.isArray(cd.Listening)? cd.Listening[0] : (cd.Listening||'');
-  const S = Array.isArray(cd.Speaking)?  cd.Speaking[0]  : (cd.Speaking||'');
-  const R = Array.isArray(cd.Reading)?   cd.Reading[0]   : (cd.Reading||'');
-  const W = Array.isArray(cd.Writing)?   cd.Writing[0]   : (cd.Writing||'');
-  const M = (cd.Mediation && Array.isArray(cd.Mediation)) ? cd.Mediation[0] : (cd.Mediation||'Explains task to peers.');
-  return {Listening:L, Speaking:S, Reading:R, Writing:W, Mediation:M};
-}
-
-function buildVocab(sc, th){ const key=`${sc}|${th}`; return STATE.vocabMap[key]||[]; }
-function buildGrammar(g){ return (STATE.funGram[g]?.grammar)||[]; }
-function buildLessons(outcomes){
-  const names=['Listening','Speaking','Reading','Writing','Mediation'];
-  return names.map(n=>({
-    outcome: outcomes[n]||'',
-    warmup:  n==='Listening'?'TPR':'Quick routine',
-    presentation: 'Target language input',
-    practice: 'Guided practice',
-    production: 'Short task',
-    assessment: 'Checklist',
-    closure: 'Exit ticket'
-  }));
-}
-
-function buildMarkdown(){
-  const info = getInstitutionDefaults();
-  const g=STATE.grade, sc=STATE.scenario, th=STATE.theme;
-  const outcomes = buildOutcomes(g);
-  const vocab = buildVocab(sc, th);
-  const grammar = buildGrammar(g);
-  const lessons = buildLessons(outcomes);
-  const md=[
-    '# Teacher English Lesson Plan',
-    `\n## General Information\n**School:** ${info.school}\n**Teacher:** ${info.teacher}\n**Subject:** English\n**Grade:** ${g}\n**School Year:** ${info.schoolYear}\n**Term:** ${info.term}`,
-    `\n## Curricular Focus\n**Scenario:** ${sc}\n**Theme:** ${th}`,
-    `\n## Context\n${document.getElementById('context').value || 'Panamanian primary group; basic resources.'}`,
-    `\n## SMART Objective\nBy the end of the unit, students will achieve target outcomes using vocabulary, functions, and structures with 80% accuracy in guided practice.`,
-    `\n## Learning Outcomes\n- (L) ${outcomes.Listening}\n- (S) ${outcomes.Speaking}\n- (R) ${outcomes.Reading}\n- (W) ${outcomes.Writing}\n- (M) ${outcomes.Mediation}`,
-    `\n## Linguistic Content\n**Vocabulary**\n${(vocab.length?vocab:['sample','words']).map(v=>`- ${v}`).join('\n')}\n\n**Grammar**\n${(grammar.length?grammar:['Can/Can\'t','There is/There are']).map(gm=>`- ${gm}`).join('\n')}`,
-    `\n## Lessons 1–5\n${lessons.map((L,i)=>`### Lesson ${i+1}\n- Learning outcome: ${L.outcome}\n- Warm-up: ${L.warmup}\n- Presentation: ${L.presentation}\n- Practice: ${L.practice}\n- Production: ${L.production}\n- Assessment: ${L.assessment}\n- Closure: ${L.closure}`).join('\n\n')}`,
-    `\n## Final Project\n**Title:** Class mini‑project\nProduct showcasing key vocabulary and functions.`,
-    `\n## Assessment Tools\n- Checklist\n- Oral rubric\n- Exit tickets`
-  ].join('\n');
-  const out=document.getElementById('output'); out.value=md; return md;
-}
-
-function refreshPreview(){ document.getElementById('preview').textContent = document.getElementById('output').value || ''; }
-
-function buildStateForOfficial(){
-  const info = getInstitutionDefaults();
-  const g=STATE.grade, sc=STATE.scenario, th=STATE.theme;
-  const outcomes = buildOutcomes(g);
-  const vocab = buildVocab(sc, th);
-  const grammar = buildGrammar(g);
-  const lessons = buildLessons(outcomes);
-  return {
-    school: info.school,
-    teacher: info.teacher,
-    grade: g,
-    schoolYear: info.schoolYear,
-    term: info.term,
-    scenario: sc,
-    theme: th,
-    context: document.getElementById('context').value || 'Panamanian primary group; basic resources.',
-    objectiveSMART: 'By the end of the unit, students will achieve target outcomes with 80% accuracy.',
-    outcomes,
-    vocabList: vocab,
-    grammarList: grammar,
-    lessons,
-    projectTitle: 'Class mini‑project',
-    projectDescription: 'Product showcasing key vocabulary and functions.',
-    assessmentTools: ['Checklist','Oral rubric','Exit tickets']
+(function(){
+  const t = {
+    es: {uploadLogo:'Subir logo', saveCfg:'Guardar configuración', loadCfg:'Cargar configuración', clearSW:'Borrar caché del SW',
+      instData:'Datos institucionales', school:'Escuela', teacher:'Docente', year:'Año', term:'Trimestre', hours:'Horas/semana', weeks:'Semanas',
+      selection:'Selección', grade:'Grado', schedule:'Fechas y tiempos por lección'},
+    en: {uploadLogo:'Upload logo', saveCfg:'Save settings', loadCfg:'Load settings', clearSW:'Clear SW cache',
+      instData:'Institutional data', school:'School', teacher:'Teacher', year:'Year', term:'Term', hours:'Hours/week', weeks:'Weeks',
+      selection:'Selection', grade:'Grade', schedule:'Dates & times per lesson'}
   };
-}
+  const DEFAULT_GRADES = ['Prekinder','Kinder','Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6'];
+  const qs = s=>document.querySelector(s);
+  const langSelect = qs('#langSelect');
+  function applyLang(lang){
+    const L=t[lang];
+    qs('#uploadLogoLabel').textContent=L.uploadLogo; qs('#saveCfg').textContent=L.saveCfg; qs('#loadCfg').textContent=L.loadCfg; qs('#clearSW').textContent=L.clearSW;
+    qs('#instDataTitle').textContent=L.instData; qs('#schoolLabel').textContent=L.school; qs('#teacherLabel').textContent=L.teacher; qs('#yearLabel').textContent=L.year;
+    qs('#termLabel').textContent=L.term; qs('#hoursLabel').textContent=L.hours; qs('#weeksLabel').textContent=L.weeks; qs('#selectionTitle').textContent=L.selection;
+    qs('#gradeLabel').textContent=L.grade; qs('#scheduleTitle').textContent=L.schedule; localStorage.setItem('planner.lang', lang);
+  }
+  langSelect.value = localStorage.getItem('planner.lang')||'es'; applyLang(langSelect.value); langSelect.addEventListener('change', e=>applyLang(e.target.value));
+  const logoFile=qs('#logoFile'), logoPreview=qs('#logoPreview');
+  function loadLogo(){ const d=localStorage.getItem('planner.logo'); if(d) logoPreview.src=d; else logoPreview.removeAttribute('src'); }
+  loadLogo(); logoFile.addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{localStorage.setItem('planner.logo', r.result); loadLogo();}; r.readAsDataURL(f); });
 
-function wireUI(){
-  document.getElementById('generate').addEventListener('click',()=>{ buildMarkdown(); refreshPreview(); });
-  document.getElementById('copyBtn').addEventListener('click', async ()=>{ const md=buildMarkdown(); try{ await navigator.clipboard.writeText(md); alert('Markdown copiado'); }catch(e){ alert('No se pudo copiar'); }});
-  document.getElementById('downloadBtn').addEventListener('click', ()=>{ const md=buildMarkdown(); const blob=new Blob([md],{type:'text/markdown'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='teacher_english_planner.md'; a.click(); URL.revokeObjectURL(a.href); });
-  document.getElementById('docBtn').addEventListener('click', ()=>{ const md=buildMarkdown(); if(typeof exportToDoc==='function'){ exportToDoc(md,'teacher_english_planner.doc'); } else { alert('md2doc.js no cargado'); } });
-  document.getElementById('pdfBtn').addEventListener('click', ()=>{ const md=buildMarkdown(); const html = `<!DOCTYPE html><html><head><meta charset='utf-8'><title>Teacher English Planner – PDF</title><style>@page{margin:20mm} body{font-family:Calibri,Arial,sans-serif} h1{font-size:18pt} h2{font-size:14pt} h3{font-size:12pt} p,li{font-size:11pt} ul{margin:6px 0 12px 18px}</style></head><body>${md.replace(/\n/g,'<br/>')}</body></html>`; const w=window; w.document.open('text/html','replace'); w.document.write(html); w.document.close(); setTimeout(()=>{ w.print(); }, 250); });
-  document.getElementById('officialBtn').addEventListener('click', async ()=>{
-    try{
-      const S = buildStateForOfficial();
-      if(typeof exportOfficialDocFromState==='function'){
-        await exportOfficialDocFromState(S, 'teacher_english_planner_official.doc');
-      } else {
-        alert('No se encontró agents/english_agent/templates/md2doc_official.js');
+  function getCfg(){ return { school:qs('#school').value, teacher:qs('#teacher').value, year:qs('#year').value, term:qs('#term').value, weeklyHours:qs('#weeklyHours').value, weeks:qs('#weeks').value, cefr:qs('#cefr').value }; }
+  function setCfg(c){ qs('#school').value=c.school||''; qs('#teacher').value=c.teacher||''; qs('#year').value=c.year||''; qs('#term').value=c.term||''; qs('#weeklyHours').value=c.weeklyHours||''; qs('#weeks').value=c.weeks||''; qs('#cefr').value=c.cefr||'A1'; }
+  qs('#saveCfg').addEventListener('click', ()=>{ localStorage.setItem('planner.cfg', JSON.stringify(getCfg())); alert('Configuración guardada'); });
+  qs('#loadCfg').addEventListener('click', ()=>{ const c=JSON.parse(localStorage.getItem('planner.cfg')||'{}'); setCfg(c); });
+  qs('#clearSW').addEventListener('click', async ()=>{ if('caches' in window){ const names=await caches.keys(); await Promise.all(names.map(n=>caches.delete(n))); } location.reload(); });
+
+  const statusEl=qs('#jsonStatus'); const state={};
+  const files=['scope_sequence_pk6.json','can_do_pk6.json','functions_grammar_pk6.json','vocab_map.json','standards_pk6.json'];
+  async function loadJSON(name){ try{ const res=await fetch(name); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); state[name]=data; statusEl.innerHTML += `✅ ${name}<br>`; } catch(e){ statusEl.innerHTML += `❌ ${name} (${e.message})<br>`; } }
+  (async()=>{ for(const f of files) await loadJSON(f); initSelectors(); })();
+
+  function normalize(data){
+    const result={grades:[], scenarios:{}, themes:{}};
+    if(!data){ result.grades = DEFAULT_GRADES.slice(); return result; }
+    // Grades may come as: ['Prekinder','Kinder','Grade 1',...] or ['PK','K','1',...] or omitted
+    if(Array.isArray(data.grades) && data.grades.length){
+      result.grades = data.grades.map(g=>{
+        // map common aliases
+        if(/^pk|prek/i.test(g)) return 'Prekinder';
+        if(/^k(inder)?$/i.test(g)) return 'Kinder';
+        if(/^\d+$/.test(g)) return `Grade ${g}`;
+        return String(g);
+      });
+    } else {
+      // Infer from scenarios/themes keys or fallback to DEFAULT
+      const keys = new Set([...(data.scenarios?Object.keys(data.scenarios):[]), ...(data.themes?Object.keys(data.themes):[])]);
+      result.grades = keys.size? Array.from(keys) : DEFAULT_GRADES.slice();
+    }
+    // Scenarios per grade
+    for(const g of result.grades){
+      const raw = (data.scenarios && data.scenarios[g]) || (data.scenarios && data.scenarios[g.replace('Grade ','')] ) || [];
+      let list=[];
+      if(Array.isArray(raw)) list = raw.map(x=> typeof x==='string' ? {id:x, name:x} : {id:x.id||x.name, name:x.name||x.id});
+      else if(typeof raw==='object' && raw){ list = Object.keys(raw).map(k=> ({id:k, name:raw[k].name||raw[k].title||k})); }
+      // Helpful fallback
+      if(list.length===0 && /Grade 3/i.test(g)) list=[{id:'places_i_can_go', name:'Places I Can Go'}];
+      result.scenarios[g]=list;
+    }
+    // Themes nested grade→scenario
+    for(const g of result.grades){
+      result.themes[g] = result.themes[g] || {};
+      const scenList = result.scenarios[g]||[];
+      for(const s of scenList){
+        const raw = (data.themes && data.themes[g] && (data.themes[g][s.id] || data.themes[g][s.name]))
+                  || (data.themes && data.themes[g.replace('Grade ','')] && (data.themes[g.replace('Grade ','')][s.id] || data.themes[g.replace('Grade ','')][s.name]))
+                  || [];
+        let list=[];
+        if(Array.isArray(raw)) list = raw.map(x=> typeof x==='string' ? {id:x, name:x} : {id:x.id||x.name, name:x.name||x.id});
+        else if(typeof raw==='object' && raw) list = Object.keys(raw).map(k=> ({id:k, name:raw[k].name||raw[k].title||k}));
+        if(list.length===0 && /Grade 3/i.test(g) && (s.id==='places_i_can_go' || s.name==='Places I Can Go')) list=[{id:'im_at_school', name:"I'm at School"}, {id:'in_my_community', name:'In My Community'}];
+        result.themes[g][s.id] = list;
       }
-    }catch(e){ alert('Error exportando formato oficial: '+e.message); }
-  });
-}
+    }
+    return result;
+  }
 
-window.addEventListener('DOMContentLoaded', async ()=>{
-  await initData(); initSelectors(); buildMarkdown(); refreshPreview(); wireUI();
-});
+  const gradeSel=qs('#grade'), scenarioSel=qs('#scenario'), themeSel=qs('#theme');
+  let model={grades:[],scenarios:{},themes:{}};
+  function initSelectors(){
+    model = normalize(state['scope_sequence_pk6.json']);
+    gradeSel.innerHTML='';
+    (model.grades.length?model.grades:DEFAULT_GRADES).forEach(g=>{ const o=document.createElement('option'); o.value=g; o.textContent=g; gradeSel.appendChild(o); });
+    gradeSel.onchange = onGrade; // replace listener
+    onGrade();
+  }
+  function onGrade(){
+    const g = gradeSel.value || (model.grades[0]||DEFAULT_GRADES[0]);
+    scenarioSel.innerHTML='';
+    (model.scenarios[g]||[]).forEach(s=>{ const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; scenarioSel.appendChild(o); });
+    scenarioSel.onchange = onScenario;
+    onScenario();
+  }
+  function onScenario(){
+    const g = gradeSel.value || (model.grades[0]||DEFAULT_GRADES[0]); const sId = scenarioSel.value;
+    themeSel.innerHTML='';
+    (model.themes[g]?.[sId]||[]).forEach(th=>{ const o=document.createElement('option'); o.value=th.id; o.textContent=th.name; themeSel.appendChild(o); });
+  }
+
+  // Lesson schedule table
+  const tbl=qs('#lessonTable');
+  function renderTable(){ tbl.innerHTML=''; for(let i=1;i<=5;i++){ const tr=document.createElement('tr'); tr.innerHTML=`<td>Lesson ${i}</td><td><input type="date" id="date_${i}"></td><td><input type="number" id="time_${i}" min="15" step="5" value="40"></td>`; tbl.appendChild(tr);} const saved=JSON.parse(localStorage.getItem('planner.schedule')||'{}'); for(let i=1;i<=5;i++){ qs(`#date_${i}`).value=saved[`date_${i}`]||''; qs(`#time_${i}`).value=saved[`time_${i}`]||40; qs(`#date_${i}`).addEventListener('change', saveSchedule); qs(`#time_${i}`).addEventListener('change', saveSchedule); } }
+  function saveSchedule(){ const s={}; for(let i=1;i<=5;i++){ s[`date_${i}`]=qs(`#date_${i}`).value; s[`time_${i}`]=qs(`#time_${i}`).value; } localStorage.setItem('planner.schedule', JSON.stringify(s)); }
+  renderTable();
+
+  // Standards panel
+  const standardsPanel=qs('#standardsPanel');
+  qs('#standardsFile').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; const text=await f.text(); try{ state['institutional_standards.json']=JSON.parse(text); renderStandards(); }catch{ standardsPanel.textContent='Error al leer JSON institucional'; }});
+  function renderStandards(){ const g=gradeSel.value; const s=scenarioSel.value; const th=themeSel.value; const src=state['institutional_standards.json']||state['standards_pk6.json']; if(!src){ standardsPanel.textContent='Sin estándares cargados'; return; } const items=(src?.[g]?.[s]?.[th])||[]; standardsPanel.innerHTML = items.length? '<ul>'+items.map(x=>`<li>${x.code||''} ${x.text||x}</li>`).join('')+'</ul>' : 'Sin estándares específicos para esta selección'; }
+  scenarioSel.addEventListener('change', renderStandards); themeSel.addEventListener('change', renderStandards); gradeSel.addEventListener('change', renderStandards);
+
+  function collect(){ return { cfg:getCfg(), grade:gradeSel.value, scenario:scenarioSel.selectedOptions[0]?.textContent||'', theme:themeSel.selectedOptions[0]?.textContent||'', schedule:JSON.parse(localStorage.getItem('planner.schedule')||'{}'), logo:localStorage.getItem('planner.logo')||'' }; }
+  async function exportDOC(kind){ const ctx=collect(); const html=await window.templates.render(kind, ctx); const blob=new Blob([html], {type:'application/msword'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=kind==='theme'?'Theme_Planner.doc':'Lesson_Planners_1-5.doc'; a.click(); }
+  async function exportPDF(kind){ const ctx=collect(); const html=await window.templates.render(kind, ctx); const w=window.open('', '_blank'); w.document.write(html); w.document.close(); w.focus(); w.print(); }
+  qs('#exportThemeDOC').addEventListener('click', ()=>exportDOC('theme')); qs('#exportThemePDF').addEventListener('click', ()=>exportPDF('theme')); qs('#exportLessonDOC').addEventListener('click', ()=>exportDOC('lesson')); qs('#exportLessonPDF').addEventListener('click', ()=>exportPDF('lesson'));
+
+  window.templates = { async render(kind, ctx){ const url = kind==='theme'? 'agents/english_agent/templates/theme_planner_template.html' : 'agents/english_agent/templates/lesson_planner_template.html'; const res=await fetch(url); const tpl=await res.text(); return tpl.replaceAll('{{LOGO}}', ctx.logo?`<img src="${ctx.logo}" style="width:80px;height:80px;object-fit:contain;"/>`: '') .replaceAll('{{SCHOOL}}', ctx.cfg.school||'') .replaceAll('{{TEACHER}}', ctx.cfg.teacher||'') .replaceAll('{{YEAR}}', ctx.cfg.year||'') .replaceAll('{{TERM}}', ctx.cfg.term||'') .replaceAll('{{GRADE}}', ctx.grade||'') .replaceAll('{{SCENARIO}}', ctx.scenario||'') .replaceAll('{{THEME}}', ctx.theme||'') .replaceAll('{{DATE_1}}', ctx.schedule.date_1||'') .replaceAll('{{DATE_2}}', ctx.schedule.date_2||'') .replaceAll('{{DATE_3}}', ctx.schedule.date_3||'') .replaceAll('{{DATE_4}}', ctx.schedule.date_4||'') .replaceAll('{{DATE_5}}', ctx.schedule.date_5||'') .replaceAll('{{TIME_1}}', ctx.schedule.time_1||'') .replaceAll('{{TIME_2}}', ctx.schedule.time_2||'') .replaceAll('{{TIME_3}}', ctx.schedule.time_3||'') .replaceAll('{{TIME_4}}', ctx.schedule.time_4||'') .replaceAll('{{TIME_5}}', ctx.schedule.time_5||''); } };
+})();
