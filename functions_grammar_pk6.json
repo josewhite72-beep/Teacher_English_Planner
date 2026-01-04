@@ -1,0 +1,108 @@
+{
+  "Pre-K": {
+    "functions": [
+      "Greeting",
+      "Naming colors",
+      "Following classroom commands",
+      "Expressing courtesy"
+    ],
+    "grammar": [
+      "This is / That is",
+      "Singular nouns",
+      "Imperatives (Sit/Stand)"
+    ]
+  },
+  "K": {
+    "functions": [
+      "Responding to TPR",
+      "Counting",
+      "Locating objects",
+      "Expressing feelings"
+    ],
+    "grammar": [
+      "Prepositions of place (in/on/under)",
+      "Can (ability)",
+      "Demonstratives"
+    ]
+  },
+  "1": {
+    "functions": [
+      "Talking about days/weather",
+      "Describing colors/shapes",
+      "Identifying family"
+    ],
+    "grammar": [
+      "Present simple of be (am/is/are)",
+      "This/That/These/Those",
+      "There is / There are"
+    ]
+  },
+  "2": {
+    "functions": [
+      "Describing size/attributes",
+      "Choosing clothes for weather",
+      "Identifying community places"
+    ],
+    "grammar": [
+      "Adjectives (big/small)",
+      "Present simple",
+      "Possessives (my/your)"
+    ]
+  },
+  "3": {
+    "functions": [
+      "Making polite requests",
+      "Shopping (numbers/prices)",
+      "Expressing likes/abilities",
+      "Giving directions"
+    ],
+    "grammar": [
+      "Can / Can’t",
+      "How much / How many",
+      "Prepositions of place",
+      "There is/There are"
+    ]
+  },
+  "4": {
+    "functions": [
+      "Sequencing steps",
+      "Describing plants/gardens",
+      "Planning trips",
+      "Reporting weather"
+    ],
+    "grammar": [
+      "Imperatives",
+      "Adverbs of sequence (first/then)",
+      "Quantifiers (some/any)",
+      "Adverbs of frequency"
+    ]
+  },
+  "5": {
+    "functions": [
+      "Reporting news",
+      "Describing actions/responsibilities",
+      "Requesting in library",
+      "Presenting community features"
+    ],
+    "grammar": [
+      "Present continuous",
+      "Future with will",
+      "Question forms",
+      "Comparatives"
+    ]
+  },
+  "6": {
+    "functions": [
+      "Interviewing classmates",
+      "Describing traditions",
+      "Narrating legends",
+      "Explaining processes"
+    ],
+    "grammar": [
+      "Simple past (was/were)",
+      "Because/so (cause/effect)",
+      "Modal verbs (must/should)",
+      "Present perfect (intro)"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "Pre-K": {
+    "Listening": [
+      "Understands simple greetings and names with visual support.",
+      "Follows 1-step instructions (sit, stand)."
+    ],
+    "Speaking": [
+      "Says own name and simple words (colors, objects).",
+      "Uses courtesy words (please, thank you) with modeling."
+    ],
+    "Reading": [
+      "Recognizes letters and name tags.",
+      "Identifies colors/objects in labeled pictures."
+    ],
+    "Writing": [
+      "Traces letters/shapes.",
+      "Copies simple words with support."
+    ]
+  },
+  "K": {
+    "Listening": [
+      "Responds to TPR commands (stand up, sit down, go to the window).",
+      "Understands basic animal sounds and classroom routines."
+    ],
+    "Speaking": [
+      "Names classroom items and numbers 1–10.",
+      "Expresses basic feelings (happy, excited)."
+    ],
+    "Reading": [
+      "Matches words to pictures (cat, book).",
+      "Identifies position words (in/on/under)."
+    ],
+    "Writing": [
+      "Copies short phrases (I can count).",
+      "Labels classroom objects in pictures."
+    ]
+  },
+  "1": {
+    "Listening": [
+      "Understands days and weather in short messages.",
+      "Identifies colors/shapes in instructions."
+    ],
+    "Speaking": [
+      "Describes family using simple sentences (This is my mom).",
+      "Names colors and shapes around them."
+    ],
+    "Reading": [
+      "Reads word/picture cards (bus, circle).",
+      "Follows simple signs (stop, library)."
+    ],
+    "Writing": [
+      "Writes labels and short sentences (It is sunny).",
+      "Completes sentence frames (This is a __)."
+    ]
+  },
+  "2": {
+    "Listening": [
+      "Understands yesterday/today statements.",
+      "Identifies clothing choices for weather."
+    ],
+    "Speaking": [
+      "Describes size and simple attributes (big/small).",
+      "Names body parts and clothing."
+    ],
+    "Reading": [
+      "Reads short phrases about places and nature.",
+      "Identifies key words in simple informational texts."
+    ],
+    "Writing": [
+      "Writes short lists (festival foods).",
+      "Completes cloze sentences with word banks."
+    ]
+  },
+  "3": {
+    "Listening": [
+      "Understands polite requests and directions.",
+      "Gets gist of prices and quantities at the market."
+    ],
+    "Speaking": [
+      "Makes polite requests (Can I have…?).",
+      "States likes and abilities (I like walking)."
+    ],
+    "Reading": [
+      "Reads labels/prices and short dialogues.",
+      "Identifies recycling and clothing keywords in posters."
+    ],
+    "Writing": [
+      "Writes shopping lists and short dialogues.",
+      "Produces captions for pictures (We recycle plastic bottles)."
+    ]
+  },
+  "4": {
+    "Listening": [
+      "Understands sequenced instructions (First, then).",
+      "Identifies weather reports and planning details."
+    ],
+    "Speaking": [
+      "Explains steps to make a poster.",
+      "Describes garden actions and trip items."
+    ],
+    "Reading": [
+      "Reads short procedural texts.",
+      "Identifies main ideas in weather reports."
+    ],
+    "Writing": [
+      "Writes sequenced steps with connectors.",
+      "Produces short informational paragraphs (mola description)."
+    ]
+  },
+  "5": {
+    "Listening": [
+      "Understands classroom/community news.",
+      "Follows directions for library tasks."
+    ],
+    "Speaking": [
+      "Reports simple news with who/what/where.",
+      "Describes classroom responsibilities."
+    ],
+    "Reading": [
+      "Reads short news texts and captions.",
+      "Identifies key info in library signs/catalogs."
+    ],
+    "Writing": [
+      "Writes short articles with images.",
+      "Creates headlines and photo captions."
+    ]
+  },
+  "6": {
+    "Listening": [
+      "Understands interviews about origin/school.",
+      "Gets main points of cultural traditions and legends."
+    ],
+    "Speaking": [
+      "Interviews classmates and presents findings.",
+      "Explains traditions/customs and narrates legends."
+    ],
+    "Reading": [
+      "Reads short informative texts (Canal, transportation).",
+      "Identifies cause/effect connectors (because/so)."
+    ],
+    "Writing": [
+      "Writes short narratives and informative texts.",
+      "Outlines career goals and rules with modals."
+    ]
+  }
+}

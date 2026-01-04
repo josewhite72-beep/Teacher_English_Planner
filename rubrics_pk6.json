@@ -1,0 +1,258 @@
+{
+  "Pre-K": {
+    "Listening": {
+      "Emerging": "Listening: Responds with gestures or single words; needs modeling.",
+      "Developing": "Listening: Produces/understands short chunks with visual support.",
+      "Proficient": "Listening: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Listening: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Responds with gestures or single words; needs modeling.",
+      "Developing": "Speaking: Produces/understands short chunks with visual support.",
+      "Proficient": "Speaking: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Speaking: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Reading": {
+      "Emerging": "Reading: Responds with gestures or single words; needs modeling.",
+      "Developing": "Reading: Produces/understands short chunks with visual support.",
+      "Proficient": "Reading: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Reading: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Writing": {
+      "Emerging": "Writing: Responds with gestures or single words; needs modeling.",
+      "Developing": "Writing: Produces/understands short chunks with visual support.",
+      "Proficient": "Writing: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Writing: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Responds with gestures or single words; needs modeling.",
+      "Developing": "Interaction: Produces/understands short chunks with visual support.",
+      "Proficient": "Interaction: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Interaction: Initiates/understands short exchanges beyond classroom routines."
+    }
+  },
+  "K": {
+    "Listening": {
+      "Emerging": "Listening: Responds with gestures or single words; needs modeling.",
+      "Developing": "Listening: Produces/understands short chunks with visual support.",
+      "Proficient": "Listening: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Listening: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Responds with gestures or single words; needs modeling.",
+      "Developing": "Speaking: Produces/understands short chunks with visual support.",
+      "Proficient": "Speaking: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Speaking: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Reading": {
+      "Emerging": "Reading: Responds with gestures or single words; needs modeling.",
+      "Developing": "Reading: Produces/understands short chunks with visual support.",
+      "Proficient": "Reading: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Reading: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Writing": {
+      "Emerging": "Writing: Responds with gestures or single words; needs modeling.",
+      "Developing": "Writing: Produces/understands short chunks with visual support.",
+      "Proficient": "Writing: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Writing: Initiates/understands short exchanges beyond classroom routines."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Responds with gestures or single words; needs modeling.",
+      "Developing": "Interaction: Produces/understands short chunks with visual support.",
+      "Proficient": "Interaction: Uses/understands simple sentences in familiar contexts.",
+      "Advanced": "Interaction: Initiates/understands short exchanges beyond classroom routines."
+    }
+  },
+  "1": {
+    "Listening": {
+      "Emerging": "Listening: Identifies key words with support; limited production.",
+      "Developing": "Listening: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Listening: Uses/understands short sentences independently.",
+      "Advanced": "Listening: Connects ideas across short texts/interactions."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Identifies key words with support; limited production.",
+      "Developing": "Speaking: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Speaking: Uses/understands short sentences independently.",
+      "Advanced": "Speaking: Connects ideas across short texts/interactions."
+    },
+    "Reading": {
+      "Emerging": "Reading: Identifies key words with support; limited production.",
+      "Developing": "Reading: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Reading: Uses/understands short sentences independently.",
+      "Advanced": "Reading: Connects ideas across short texts/interactions."
+    },
+    "Writing": {
+      "Emerging": "Writing: Identifies key words with support; limited production.",
+      "Developing": "Writing: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Writing: Uses/understands short sentences independently.",
+      "Advanced": "Writing: Connects ideas across short texts/interactions."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Identifies key words with support; limited production.",
+      "Developing": "Interaction: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Interaction: Uses/understands short sentences independently.",
+      "Advanced": "Interaction: Connects ideas across short texts/interactions."
+    }
+  },
+  "2": {
+    "Listening": {
+      "Emerging": "Listening: Identifies key words with support; limited production.",
+      "Developing": "Listening: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Listening: Uses/understands short sentences independently.",
+      "Advanced": "Listening: Connects ideas across short texts/interactions."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Identifies key words with support; limited production.",
+      "Developing": "Speaking: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Speaking: Uses/understands short sentences independently.",
+      "Advanced": "Speaking: Connects ideas across short texts/interactions."
+    },
+    "Reading": {
+      "Emerging": "Reading: Identifies key words with support; limited production.",
+      "Developing": "Reading: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Reading: Uses/understands short sentences independently.",
+      "Advanced": "Reading: Connects ideas across short texts/interactions."
+    },
+    "Writing": {
+      "Emerging": "Writing: Identifies key words with support; limited production.",
+      "Developing": "Writing: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Writing: Uses/understands short sentences independently.",
+      "Advanced": "Writing: Connects ideas across short texts/interactions."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Identifies key words with support; limited production.",
+      "Developing": "Interaction: Produces/understands simple phrases; relies on prompts.",
+      "Proficient": "Interaction: Uses/understands short sentences independently.",
+      "Advanced": "Interaction: Connects ideas across short texts/interactions."
+    }
+  },
+  "3": {
+    "Listening": {
+      "Emerging": "Listening: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Listening: Handles routine tasks with simple sentences.",
+      "Proficient": "Listening: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Listening: Expands detail; adapts language to task and audience."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Speaking: Handles routine tasks with simple sentences.",
+      "Proficient": "Speaking: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Speaking: Expands detail; adapts language to task and audience."
+    },
+    "Reading": {
+      "Emerging": "Reading: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Reading: Handles routine tasks with simple sentences.",
+      "Proficient": "Reading: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Reading: Expands detail; adapts language to task and audience."
+    },
+    "Writing": {
+      "Emerging": "Writing: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Writing: Handles routine tasks with simple sentences.",
+      "Proficient": "Writing: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Writing: Expands detail; adapts language to task and audience."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Interaction: Handles routine tasks with simple sentences.",
+      "Proficient": "Interaction: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Interaction: Expands detail; adapts language to task and audience."
+    }
+  },
+  "4": {
+    "Listening": {
+      "Emerging": "Listening: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Listening: Handles routine tasks with simple sentences.",
+      "Proficient": "Listening: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Listening: Expands detail; adapts language to task and audience."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Speaking: Handles routine tasks with simple sentences.",
+      "Proficient": "Speaking: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Speaking: Expands detail; adapts language to task and audience."
+    },
+    "Reading": {
+      "Emerging": "Reading: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Reading: Handles routine tasks with simple sentences.",
+      "Proficient": "Reading: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Reading: Expands detail; adapts language to task and audience."
+    },
+    "Writing": {
+      "Emerging": "Writing: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Writing: Handles routine tasks with simple sentences.",
+      "Proficient": "Writing: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Writing: Expands detail; adapts language to task and audience."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Gets gist/produces basic forms; occasional errors.",
+      "Developing": "Interaction: Handles routine tasks with simple sentences.",
+      "Proficient": "Interaction: Sustains short interactions; uses target functions accurately.",
+      "Advanced": "Interaction: Expands detail; adapts language to task and audience."
+    }
+  },
+  "5": {
+    "Listening": {
+      "Emerging": "Listening: Understands/provides essential info; may hesitate.",
+      "Developing": "Listening: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Listening: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Listening: Integrates detail, reasons, and compares with clear control."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Understands/provides essential info; may hesitate.",
+      "Developing": "Speaking: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Speaking: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Speaking: Integrates detail, reasons, and compares with clear control."
+    },
+    "Reading": {
+      "Emerging": "Reading: Understands/provides essential info; may hesitate.",
+      "Developing": "Reading: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Reading: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Reading: Integrates detail, reasons, and compares with clear control."
+    },
+    "Writing": {
+      "Emerging": "Writing: Understands/provides essential info; may hesitate.",
+      "Developing": "Writing: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Writing: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Writing: Integrates detail, reasons, and compares with clear control."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Understands/provides essential info; may hesitate.",
+      "Developing": "Interaction: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Interaction: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Interaction: Integrates detail, reasons, and compares with clear control."
+    }
+  },
+  "6": {
+    "Listening": {
+      "Emerging": "Listening: Understands/provides essential info; may hesitate.",
+      "Developing": "Listening: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Listening: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Listening: Integrates detail, reasons, and compares with clear control."
+    },
+    "Speaking": {
+      "Emerging": "Speaking: Understands/provides essential info; may hesitate.",
+      "Developing": "Speaking: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Speaking: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Speaking: Integrates detail, reasons, and compares with clear control."
+    },
+    "Reading": {
+      "Emerging": "Reading: Understands/provides essential info; may hesitate.",
+      "Developing": "Reading: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Reading: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Reading: Integrates detail, reasons, and compares with clear control."
+    },
+    "Writing": {
+      "Emerging": "Writing: Understands/provides essential info; may hesitate.",
+      "Developing": "Writing: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Writing: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Writing: Integrates detail, reasons, and compares with clear control."
+    },
+    "Interaction": {
+      "Emerging": "Interaction: Understands/provides essential info; may hesitate.",
+      "Developing": "Interaction: Organizes ideas with basic cohesion; minor errors.",
+      "Proficient": "Interaction: Communicates clearly with appropriate vocabulary/structures.",
+      "Advanced": "Interaction: Integrates detail, reasons, and compares with clear control."
+    }
+  }
+}
