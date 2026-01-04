@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Teacher English Planner (PWA)</title>
+<style>
+  :root { --bg:#0f1115; --fg:#e7e9ee; --card:#181b22; --accent:#4dabf7; --border:#2a2f3a; }
+  [data-theme="light"] { --bg:#ffffff; --fg:#111; --card:#f6f7f9; --accent:#0b6efd; --border:#dcdfe4; }
+  body{background:var(--bg); color:var(--fg); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; margin:0}
+  header{padding:16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px}
+  .wrap{max-width:920px; margin:0 auto; padding:16px}
+  .row{display:grid; grid-template-columns:repeat(2, minmax(280px,1fr)); gap:12px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px}
+  .toolbar{display:flex; gap:8px; align-items:center}
+  .btn{background:transparent; color:var(--fg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; cursor:pointer}
+  .btn.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+  label{font-size:14px; opacity:.85}
+  input, select, textarea{width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:transparent; color:var(--fg)}
+  table{width:100%; border-collapse:collapse}
+  th,td{border:1px solid var(--border); padding:8px}
+  .footer{font-size:12px; opacity:.7; margin-top:8px}
+</style>
+</head>
+<body>
+<header>
+  <div style="font-weight:700">Teacher English Planner (PWA)</div>
+  <div class="toolbar" style="margin-left:auto">
+    <button id="themeToggle" class="btn">Modo claro</button>
+    <select id="langSelect" class="btn">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+    <label class="btn">
+      <input id="logoFile" type="file" accept="image/*" hidden>
+      <span id="uploadLogoLabel">Subir logo</span>
+    </label>
+    <button id="saveCfg" class="btn">Guardar configuración</button>
+    <button id="loadCfg" class="btn">Cargar configuración</button>
+    <button id="clearSW" class="btn">Borrar caché del SW</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="card">
+    <h3>Datos institucionales</h3>
+    <div class="row">
+      <div><label>School</label><input id="school" placeholder="CEBG Barrigón"></div>
+      <div><label>Teacher</label><input id="teacher" placeholder="José White"></div>
+      <div><label>School Year</label><input id="year" placeholder="2026"></div>
+      <div><label>Trimester</label><input id="term" placeholder="1"></div>
+      <div><label>Weekly Hours</label><input id="weeklyHours" type="number" min="1" value="3"></div>
+      <div><label>Weeks (range)</label><input id="weeks" placeholder="From week __ to week __"></div>
+      <div><label>CEFR Level</label>
+        <select id="cefr"><option>Pre-A1 / A1 / A2</option><option>B1 / B2</option></select>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Selección curricular</h3>
+    <div class="row">
+      <div>
+        <label>Grade</label>
+        <select id="grade"></select>
+      </div>
+      <div>
+        <label>Scenario</label>
+        <select id="scenario"></select>
+      </div>
+      <div>
+        <label>Theme</label>
+        <select id="theme"></select>
+      </div>
+      <div>
+        <label>Context</label>
+        <textarea id="context" placeholder="Grupo de primaria panameña; recursos básicos."></textarea>
+      </div>
+    </div>
+    <div id="jsonStatus" class="footer">▼ JSON y rutas</div>
+  </section>
+
+  <section class="card">
+    <h3>Fechas y tiempos por lección</h3>
+    <table>
+      <thead><tr><th>Lección</th><th>Fecha</th><th>Tiempo (min)</th></tr></thead>
+      <tbody id="lessonTable"></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h3>Acciones</h3>
+    <div class="toolbar">
+      <button id="genPreview" class="btn primary">Generar Preview Markdown</button>
+      <button id="exportThemeDOC" class="btn">Theme Planner (Word .doc)</button>
+      <button id="exportThemePDF" class="btn">Theme Planner (PDF)</button>
+      <button id="exportLessonDOC" class="btn">Lesson Planner 1–5 (Word .doc)</button>
+      <button id="exportLessonPDF" class="btn">Lesson Planner 1–5 (PDF)</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Vista previa (Markdown)</h3>
+    <textarea id="mdPreview" rows="10"></textarea>
+  </section>
+
+  <section class="card">
+    <h3>Specific Standards (enriquecido)</h3>
+    <div id="standardsPanel">Cargar JSON institucional para ver estándares por grado/escenario/tema.</div>
+    <input id="standardsFile" type="file" accept="application/json">
+  </section>
+</div>
+
+<script src="app/app.js"></script>
+</body>
+</html>
