@@ -1,0 +1,80 @@
+<div class="header">
+  <div class="brand">
+    <div class="gov">GOBIERNO NACIONAL – CON PASO FIRME</div>
+    <div class="meduca">MINISTERIO DE EDUCACIÓN – Dirección Nacional de Enseñanza de Lengua Extranjera</div>
+  </div>
+  <h1>Theme Planner # ___ – Overview</h1>
+</div>
+
+<section>
+  <h2>1. General Information:</h2>
+  <table class="grid">
+    <tr>
+      <td><strong>Teacher(s):</strong> {{Teacher}}</td>
+      <td><strong>Grade:</strong> {{Grade}}</td>
+      <td><strong>CEFR Level:</strong> {{CEFR}}</td>
+      <td><strong>Trimester:</strong> {{Trimester}}</td>
+    </tr>
+    <tr>
+      <td><strong>Weekly Hour(s):</strong> {{WeeklyHours}}</td>
+      <td colspan="2"><strong>Week(s):</strong> {{Weeks}}</td>
+      <td><strong>Scenario __:</strong> {{Scenario}}</td>
+    </tr>
+    <tr>
+      <td colspan="4"><strong>8. Theme __:</strong> {{Theme}}</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>2. Specific Standards and Learning Outcomes:</h2>
+  <table class="outcomes">
+    <thead><tr><th>Skills</th><th>Specific Standards</th><th>Learning Outcomes</th></tr></thead>
+    <tbody>
+      {{OutcomesRows}}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>3. Communicative Competences</h2>
+  <table class="comms">
+    <tr>
+      <th>Linguistic Competence (Learn to Know)</th>
+      <th>Pragmatic Competence (Learn to Do)</th>
+      <th>Sociolinguistic Competence (Learn to Be)</th>
+    </tr>
+    <tr>
+      <td>
+        <ul>
+          <li><strong>Grammatical Features:</strong> {{Grammar}}</li>
+          <li><strong>Vocabulary:</strong> {{Vocabulary}}</li>
+          <li><strong>Pronunciation &amp; Phonemic Awareness:</strong> {{Pronunciation}}</li>
+        </ul>
+        <p><strong>21st‑Century Skills Project:</strong> {{Project}}</p>
+      </td>
+      <td>{{Pragmatic}}</td>
+      <td>{{Sociolinguistic}}</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>5. Materials and Teaching Strategies</h2>
+  <table class="materials">
+    <tr>
+      <td><strong>Materials</strong><br/>{{Materials}}</td>
+      <td><strong>Differentiated Instruction and Accommodations for Students with Diverse Learning Needs (DLN)</strong><br/>{{DI}}</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>6. Learning Sequence</h2>
+  <table class="sequence">
+    <thead><tr><th>Learning Sequence</th><th>Date</th><th>Notes</th></tr></thead>
+    <tbody>
+      {{SequenceRows}}
+    </tbody>
+  </table>
+</section>
