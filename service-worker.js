@@ -1,5 +1,5 @@
 /* MEDUCA English Planner – Service Worker */
-const CACHE_VERSION = 'v3.0.0';
+const CACHE_VERSION = 'v4.0.0';
 const CACHE_NAME = `meduca-planner-${CACHE_VERSION}`;
 const ASSETS = [
   './', './index.html', './app.js', './vocab_map.json', './md2doc.js', './md2pdf.js', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'
