@@ -1,4 +1,4 @@
-# MEDUCA English Planner (PWA)
+# Teacher English Planner (PWA)
 Archivos listos:
 - index.html (interfaz)
 - app.js (Scope por grado, vocabulario dinámico, generador Markdown)
