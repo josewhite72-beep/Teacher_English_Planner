@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher English Planner</title>
+  <!-- ✅ Add DOCX library (browser build). If you already include a DOCX script, keep your version -->
+  <script src="https://cdn.jsdelivr.net/npm/docx@9.0.3/build/index.browser.js"></script>
+  <style>
+    /* Optional: minimal styles; do not remove your existing CSS */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 0; }
+    header { padding: 1rem; border-bottom: 1px solid #ddd; }
+    main { max-width: 960px; margin: 1rem auto; padding: 0 1rem 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    label { font-weight: 600; display: block; margin-bottom: .25rem; }
+    select { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: .6rem 1rem; border: 0; border-radius: 6px; background: #0b6efd; color: #fff; font-weight: 600; cursor: pointer; }
+    button:disabled { background: #9ab; cursor: not-allowed; }
+    .muted { color: #666; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Teacher English Planner</h1>
+    <p class="muted">This index integrates DOCX export without removing your existing UI. Keep your PDF button and other elements as-is.</p>
+  </header>
+
+  <main>
+    <!--
+      🛠 IMPORTANT: If you already have Grade/Scenario/Theme selectors and an Export button,
+      keep them. The ids below are the ones used by agentExport.js. If your existing ids are different,
+      you can keep your own; agentExport.js attempts to auto-detect by partial id. 
+      These elements are here only as safe defaults.
+    -->
+    <section class="grid" aria-label="Planner selectors">
+      <div>
+        <label for="gradeSelect">Grade</label>
+        <select id="gradeSelect">
+          <option value="">Select Grade</option>
+          <option value="pre-k">Pre‑K</option>
+          <option value="k">K</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div>
+        <label for="scenarioSelect">Scenario</label>
+        <select id="scenarioSelect">
+          <option value="">Select Scenario</option>
+        </select>
+      </div>
+      <div>
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect">
+          <option value="">Select Theme</option>
+        </select>
+      </div>
+    </section>
+
+    <div style="margin-top: 1rem; display:flex; gap:.75rem; flex-wrap:wrap">
+      <!-- ✅ Keep your existing Export to PDF button if already present -->
+      <button id="exportBtn" type="button">Export DOCX</button>
+      <button id="exportPdfBtn" type="button" onclick="window.print()">Export PDF</button>
+    </div>
+  </main>
+
+  <!-- ✅ Your existing scripts can remain below. We add our module imports. -->
+  <script type="module">
+    // Integrate agent export (enrich + docx) without changing your UI
+    import { setupDocxExport } from './app/agentExport.js';
+    import { loadScenarios, loadThemes } from './app/teacherAgent.js';
+
+    // Populate scenarios/themes on selection changes
+    const gradeSelect = document.getElementById('gradeSelect');
+    const scenarioSelect = document.getElementById('scenarioSelect');
+    gradeSelect?.addEventListener('change', async () => {
+      const gradeKey = gradeSelect.value;
+      if (!gradeKey) return;
+      await loadScenarios(gradeKey);
+      // Clear themes until scenario chosen
+      const themeSelect = document.getElementById('themeSelect');
+      if (themeSelect) themeSelect.innerHTML = '<option value="">Select Theme</option>';
+    });
+
+    scenarioSelect?.addEventListener('change', async () => {
+      const gradeKey = gradeSelect?.value;
+      const scenarioId = scenarioSelect?.value;
+      if (gradeKey && scenarioId) {
+        await loadThemes(gradeKey, scenarioId);
+      }
+    });
+
+    // Attach export logic to existing button
+    setupDocxExport();
+  </script>
+</body>
+</html>
