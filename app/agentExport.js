@@ -1,93 +1,90 @@
-
 // app/agentExport.js
 import { normalizeGradeData } from './compatAdapter.js';
 import { enrichTheme } from './enrichment.js';
 import { exportDocx } from './docxExport.js';
 
-// Function to get selected values (adjust selectors to match your HTML)
+// Helper functions to get selected values
 function getSelectedGrade() {
-  const gradeSelect = document.getElementById('gradeSelect') || document.querySelector('[id*="grade"]');
-  return gradeSelect ? gradeSelect.value : null;
+  return document.getElementById('grade').value;
 }
 
 function getSelectedScenario() {
-  const scenarioSelect = document.getElementById('scenarioSelect') || document.querySelector('[id*="scenario"]');
-  return scenarioSelect ? scenarioSelect.value : null;
+  return document.getElementById('scenario').value;
 }
 
 function getSelectedTheme() {
-  const themeSelect = document.getElementById('themeSelect') || document.querySelector('[id*="theme"]');
-  return themeSelect ? themeSelect.value : null;
+  return document.getElementById('theme').value;
 }
 
-// Main export function - hook into existing button
-export async function setupDocxExport() {
-  // Find existing export button (adjust selector as needed)
-  const exportBtn = document.getElementById('exportBtn') || 
-                   document.querySelector('[onclick*="export"]') || 
-                   document.querySelector('[class*="export"]') ||
-                   document.querySelector('button');
+// Main export handler for Theme DOCX
+async function exportThemeDocx() {
+  const gradeKey = getSelectedGrade();
+  const scenarioId = getSelectedScenario();
+  const themeId = getSelectedTheme();
 
-  if (exportBtn) {
-    exportBtn.addEventListener('click', onExportDocx);
-    console.log("DOCX export functionality attached to existing button");
-  } else {
-    console.warn("No export button found - add one manually or adjust selectors");
+  if (!gradeKey || !scenarioId || !themeId) {
+    alert("Por favor seleccione Grado, Escenario y Tema");
+    return;
   }
-}
 
-// The main export handler
-export async function onExportDocx() {
   try {
-    const gradeKey = getSelectedGrade();
-    const scenarioId = getSelectedScenario();
-    const themeId = getSelectedTheme();
-
-    if (!gradeKey || !scenarioId || !themeId) {
-      alert("Please select Grade, Scenario, and Theme first");
-      return;
-    }
-
-    // Load grade data
     const rawGrade = await fetch(`./data/grade_${gradeKey}.json`).then(r => r.json());
     const normalizedThemes = normalizeGradeData(rawGrade);
+    const themeObj = normalizedThemes.find(t => t.theme.id === themeId);
 
-    // Find theme
-    const themeObj = normalizedThemes.find(t => t?.theme?.id === themeId);
     if (!themeObj) {
-      console.error("Theme not found", themeId);
-      alert("Theme not found. Please check your selection.");
+      alert("Tema no encontrado");
       return;
     }
 
-    // Load institutional standards if available
-    let institutionalStandards = {};
-    try {
-      institutionalStandards = await fetch(`./data/grade_${gradeKey}_institutional_standards.json`)
-        .then(r => r.json())
-        .catch(() => ({}));
-    } catch (e) {
-      console.warn("No institutional standards found for this grade");
-    }
+    const enriched = enrichTheme(themeObj);
+    const filename = `${gradeKey}_${scenarioId}_${themeId}_theme.docx`;
 
-    // Enrich the theme
-    const enriched = enrichTheme(themeObj, institutionalStandards);
-
-    // Generate filename
-    const cleanGrade = String(gradeKey).replace(/[^a-zA-Z0-9]/g, '');
-    const cleanScenario = String(scenarioId).replace(/[^a-zA-Z0-9]/g, '');
-    const cleanTheme = String(themeId).replace(/[^a-zA-Z0-9]/g, '');
-    const filename = `${cleanGrade}_${cleanScenario}_${cleanTheme}.docx`;
-
-    // Export to .docx
-    await exportDocx(enriched, filename);
-
-    console.log("DOCX export completed successfully");
+    await exportDocx(enriched, filename, true); // true = theme only
+    console.log("Theme DOCX export completed");
   } catch (error) {
-    console.error("Export failed:", error);
-    alert("Export failed. Check console for details.");
+    console.error("Error exporting Theme DOCX:", error);
+    alert("Error al generar el archivo DOCX. Verifique la consola.");
   }
 }
 
-// Initialize export functionality when DOM is ready
-document.addEventListener('DOMContentLoaded', setupDocxExport);
+// Main export handler for Lessons DOCX
+async function exportLessonsDocx() {
+  const gradeKey = getSelectedGrade();
+  const scenarioId = getSelectedScenario();
+  const themeId = getSelectedTheme();
+
+  if (!gradeKey || !scenarioId || !themeId) {
+    alert("Por favor seleccione Grado, Escenario y Tema");
+    return;
+  }
+
+  try {
+    const rawGrade = await fetch(`./data/grade_${gradeKey}.json`).then(r => r.json());
+    const normalizedThemes = normalizeGradeData(rawGrade);
+    const themeObj = normalizedThemes.find(t => t.theme.id === themeId);
+
+    if (!themeObj) {
+      alert("Tema no encontrado");
+      return;
+    }
+
+    const enriched = enrichTheme(themeObj);
+    const filename = `${gradeKey}_${scenarioId}_${themeId}_lessons.docx`;
+
+    await exportDocx(enriched, filename, false); // false = include lessons
+    console.log("Lessons DOCX export completed");
+  } catch (error) {
+    console.error("Error exporting Lessons DOCX:", error);
+    alert("Error al generar el archivo DOCX. Verifique la consola.");
+  }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // Attach event listeners to new buttons
+  document.getElementById('exportThemeDOCX')?.addEventListener('click', exportThemeDocx);
+  document.getElementById('exportLessonDOCX')?.addEventListener('click', exportLessonsDocx);
+  
+  console.log("DOCX export functionality initialized");
+});
