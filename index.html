@@ -90,14 +90,14 @@
   </section>
 
   <section class="card">
-    <h3>Acciones</h3>
-    <div class="toolbar">
-      <button id="genPreview" class="btn primary">Generar Preview Markdown</button>
-      <button id="exportThemeDOC" class="btn">Theme Planner (Word .doc)</button>
-      <button id="exportThemePDF" class="btn">Theme Planner (PDF)</button>
-      <button id="exportLessonDOC" class="btn">Lesson Planner 1–5 (Word .doc)</button>
-      <button id="exportLessonPDF" class="btn">Lesson Planner 1–5 (PDF)</button>
-    </div>
+  <h3>Acciones</h3>
+  <div class="toolbar">
+    <button id="genPreview" class="btn primary">Generar Preview Markdown</button>
+    <button id="exportThemeDOCX" class="btn">Theme Planner (Word .docx)</button>
+    <button id="exportLessonDOCX" class="btn">Lesson Planner 1–5 (Word .docx)</button>
+    <button id="exportThemePDF" class="btn">Theme Planner (PDF)</button>
+    <button id="exportLessonPDF" class="btn">Lesson Planner 1–5 (PDF)</button>
+  </div>
   </section>
 
   <section class="card">
@@ -113,5 +113,12 @@
 </div>
 
 <script src="app/app.js"></script>
+  <!-- Docx library -->
+<script src="https://unpkg.com/docx@7.4.1/build/index.js"></script>
+
+<!-- Import your new modules -->
+<script type="module">
+  import './app/agentExport.js';
+</script>
 </body>
 </html>
