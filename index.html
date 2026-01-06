@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher English Planner</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    header { display:flex; align-items:center; gap:12px; }
+    header img { height: 60px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
+    .card { border:1px solid #ddd; border-radius:8px; padding:12px; }
+    table { width:100%; border-collapse:collapse; }
+    td, th { border:1px solid #ddd; padding:6px; }
+    textarea { width:100%; min-height:200px; }
+    .btns { display:flex; flex-wrap:wrap; gap:8px; }
+    [data-theme="dark"] { background:#121212; color:#eee; }
+    [data-theme="dark"] .card { border-color:#333; }
+  </style>
+  <!-- docx library -->
+  <script src="https://unpkg.com/docx@8.0.0/build/index.js"></script>
+  <!-- jsPDF library -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body data-theme="light">
+  <header>
+    <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'" />
+    <h1>Teacher English Planner</h1>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Configuración institucional</h3>
+      <label>Colegio: <input id="school" placeholder="CEBG Barrigón" /></label><br />
+      <label>Docente: <input id="teacher" placeholder="José White" /></label><br />
+      <label>Año: <input id="year" value="2026" /></label><br />
+      <label>Trimestre: <input id="term" value="1" /></label><br />
+      <label>Horas/Semana: <input id="weeklyHours" value="3" /></label><br />
+      <label>Semanas: <input id="weeks" placeholder="From week __ to week __" /></label><br />
+      <label>CEFR: <input id="cefr" value="Pre-A1 / A1 / A2" /></label><br />
+      <label>Contexto: <input id="context" placeholder="Grupo de primaria panameña; recursos básicos." /></label>
+    </div>
+
+    <div class="card">
+      <h3>Selección Curricular</h3>
+      <label>Grado: 
+        <select id="grade"></select>
+      </label><br />
+      <label>Escenario: 
+        <select id="scenario"><option value="">Seleccionar Escenario</option></select>
+      </label><br />
+      <label>Tema: 
+        <select id="theme"><option value="">Seleccionar Tema</option></select>
+      </label>
+      <div class="btns" style="margin-top:8px;">
+        <button id="langToggle">Switch to English</button>
+        <button id="themeToggle">Modo oscuro</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Cronograma de Lecciones</h3>
+      <table>
+        <thead><tr><th>Lección</th><th>Fecha</th><th>Tiempo (min)</th></tr></thead>
+        <tbody id="lessonTable"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Panel de Estándares</h3>
+      <div id="standardsPanel"></div>
+    </div>
+
+    <div class="card">
+      <h3>Vista previa Markdown</h3>
+      <textarea id="mdPreview" placeholder="Pulsa 'Generar Vista Previa'..."></textarea>
+      <div class="btns">
+        <button id="genPreview">Generar Vista Previa</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Exportar</h3>
+      <div class="btns">
+        <button id="exportThemeDOC">Exportar Theme DOCX</button>
+        <button id="exportLessonDOC">Exportar Lessons DOCX</button>
+        <button id="exportThemePDF">Exportar Theme PDF</button>
+        <button id="exportLessonPDF">Exportar Lessons PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app/app.js"></script>
+</body>
+</html>
