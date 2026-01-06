@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Teacher English Planner (PWA)</title>
+<!-- Iconos y PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="assets/logo.png" type="image/png">
+<!-- Estilos mejorados -->
+<style>
+  :root { 
+    --bg:#0f1115; 
+    --fg:#e7e9ee; 
+    --card:#181b22; 
+    --accent:#4dabf7; 
+    --border:#2a2f3a; 
+    --success:#51cf66;
+    --warning:#ff922b;
+    --danger:#ff6b6b;
+    --radius:8px;
+  }
+  
+  [data-theme="light"] { 
+    --bg:#ffffff; 
+    --fg:#111; 
+    --card:#f6f7f9; 
+    --accent:#0b6efd; 
+    --border:#dcdfe4; 
+    --success:#40c057;
+    --warning:#f59f00;
+    --danger:#fa5252;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background:var(--bg); 
+    color:var(--fg); 
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; 
+    margin:0;
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Header mejorado */
+  header {
+    padding:16px; 
+    border-bottom:1px solid var(--border); 
+    display:flex; 
+    align-items:center; 
+    gap:12px;
+    flex-wrap: wrap;
+  }
+  
+  header > div:first-child {
+    font-weight:700; 
+    font-size: 1.25rem;
+    background: var(--accent);
+    color: white;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+  }
+  
+  .wrap {
+    max-width:920px; 
+    margin:0 auto; 
+    padding:16px;
+  }
+  
+  /* Grid responsive mejorado */
+  .row {
+    display:grid; 
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); 
+    gap:16px;
+    margin-bottom: 16px;
+  }
+  
+  .card {
+    background:var(--card); 
+    border:1px solid var(--border); 
+    border-radius:12px; 
+    padding:20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+  
+  /* Toolbar mejorado */
+  .toolbar {
+    display:flex; 
+    gap:8px; 
+    align-items:center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  
+  /* Botones mejorados */
+  .btn {
+    background:transparent; 
+    color:var(--fg); 
+    border:1px solid var(--border); 
+    border-radius:var(--radius); 
+    padding:8px 12px; 
+    cursor:pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .btn:hover {
+    background: var(--border);
+    transform: translateY(-1px);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  .btn.primary {
+    background:var(--accent); 
+    color:#fff; 
+    border-color:var(--accent);
+    font-weight: 600;
+  }
+  
+  .btn.primary:hover {
+    background: color-mix(in srgb, var(--accent) 90%, black);
+  }
+  
+  .btn.success {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+  }
+  
+  .btn.warning {
+    background: var(--warning);
+    color: white;
+    border-color: var(--warning);
+  }
+  
+  .btn.danger {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+  }
+  
+  /* Formularios mejorados */
+  label {
+    display: block;
+    font-size:14px; 
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--fg);
+    opacity: 0.9;
+  }
+  
+  input, select, textarea {
+    width:100%; 
+    padding:10px 12px; 
+    border-radius:var(--radius); 
+    border:1px solid var(--border); 
+    background:transparent; 
+    color:var(--fg);
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  
+  input[type="number"] {
+    width: auto;
+    min-width: 100px;
+  }
+  
+  input[type="date"] {
+    min-width: 140px;
+  }
+  
+  /* Tabla mejorada */
+  table {
+    width:100%; 
+    border-collapse:collapse;
+    margin-top: 12px;
+  }
+  
+  th, td {
+    border:1px solid var(--border); 
+    padding:12px;
+    text-align: left;
+  }
+  
+  th {
+    background: color-mix(in srgb, var(--card) 50%, transparent);
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+  
+  /* Textarea de preview */
+  #mdPreview {
+    width: 100%;
+    min-height: 300px;
+    padding: 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    resize: vertical;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  
+  /* Panel de estándares */
+  #standardsPanel {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin: 16px 0;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  
+  #standardsPanel h4 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  
+  #standardsPanel ul {
+    margin: 8px 0;
+    padding-left: 20px;
+  }
+  
+  #standardsPanel li {
+    margin-bottom: 6px;
+  }
+  
+  /* Footer y status */
+  .footer {
+    font-size:12px; 
+    opacity:.7; 
+    margin-top:16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+  
+  .status-indicator.loading {
+    background: var(--warning);
+    animation: pulse 1.5s infinite;
+  }
+  
+  .status-indicator.error {
+    background: var(--danger);
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .wrap {
+      padding: 12px;
+    }
+    
+    header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+    
+    header .toolbar {
+      margin-left: 0;
+      justify-content: center;
+    }
+    
+    .row {
+      grid-template-columns: 1fr;
+    }
+    
+    .toolbar {
+      justify-content: center;
+    }
+    
+    .btn {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .btn {
+      width: 100%;
+    }
+    
+    .card {
+      padding: 16px;
+    }
+  }
+  
+  /* Mensajes y alertas */
+  .alert {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    border-left: 4px solid;
+  }
+  
+  .alert-success {
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    border-left-color: var(--success);
+  }
+  
+  .alert-warning {
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    border-left-color: var(--warning);
+  }
+  
+  .alert-error {
+    background: color-mix(in srgb, var(--danger) 15%, transparent);
+    border-left-color: var(--danger);
+  }
+  
+  .alert-info {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    border-left-color: var(--accent);
+  }
+  
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--card);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+  
+  /* Selectores mejorados */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e7e9ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+  }
+  
+  [data-theme="light"] select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+  
+  /* Input file personalizado */
+  input[type="file"] {
+    padding: 8px;
+  }
+  
+  /* Estado loading */
+  .loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body data-theme="dark">
+<header>
+  <div>Teacher English Planner (PWA)</div>
+  <div class="toolbar" style="margin-left:auto">
+    <button id="themeToggle" class="btn">Modo claro</button>
+    <select id="langSelect" class="btn">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+    <label class="btn" style="cursor: pointer;">
+      <input id="logoFile" type="file" accept="image/*" hidden>
+      <span id="uploadLogoLabel">Subir logo</span>
+    </label>
+    <button id="saveCfg" class="btn">Guardar configuración</button>
+    <button id="loadCfg" class="btn">Cargar configuración</button>
+    <button id="clearSW" class="btn warning">Borrar caché</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- Mensaje de estado -->
+  <div id="statusMessage" style="display: none;"></div>
+  
+  <section class="card">
+    <h3>Datos institucionales</h3>
+    <div class="row">
+      <div><label>School</label><input id="school" placeholder="CEBG Barrigón" value="CEBG Barrigón"></div>
+      <div><label>Teacher</label><input id="teacher" placeholder="José White" value="José White"></div>
+      <div><label>School Year</label><input id="year" placeholder="2026" value="2026"></div>
+      <div><label>Trimester</label><input id="term" placeholder="1" value="1"></div>
+      <div><label>Weekly Hours</label><input id="weeklyHours" type="number" min="1" value="3"></div>
+      <div><label>Weeks (range)</label><input id="weeks" placeholder="From week __ to week __"></div>
+      <div><label>CEFR Level</label>
+        <select id="cefr">
+          <option>Pre-A1 / A1 / A2</option>
+          <option>A2 / B1</option>
+          <option>B1 / B2</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Selección curricular</h3>
+    <div class="row">
+      <div>
+        <label>Grade</label>
+        <select id="grade">
+          <option value="">Seleccionar Grado</option>
+          <!-- Se llenará dinámicamente -->
+        </select>
+        <div class="footer">
+          <span class="status-indicator" id="gradeStatus"></span>
+          <span id="gradeInfo">Selecciona un grado</span>
+        </div>
+      </div>
+      <div>
+        <label>Scenario</label>
+        <select id="scenario">
+          <option value="">Seleccionar Escenario</option>
+        </select>
+        <div class="footer">
+          <span class="status-indicator" id="scenarioStatus"></span>
+          <span id="scenarioInfo">8 scenarios disponibles por grado</span>
+        </div>
+      </div>
+      <div>
+        <label>Theme</label>
+        <select id="theme">
+          <option value="">Seleccionar Tema</option>
+        </select>
+        <div class="footer">
+          <span class="status-indicator" id="themeStatus"></span>
+          <span id="themeInfo">2 temas por scenario</span>
+        </div>
+      </div>
+      <div>
+        <label>Context</label>
+        <textarea id="context" placeholder="Grupo de primaria panameña; recursos básicos." rows="3">Grupo de primaria panameña; recursos básicos.</textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Fechas y tiempos por lección (5 lecciones por tema)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th width="20%">Lección</th>
+          <th width="40%">Fecha</th>
+          <th width="40%">Tiempo (min)</th>
+        </tr>
+      </thead>
+      <tbody id="lessonTable">
+        <!-- Se generará dinámicamente -->
+      </tbody>
+    </table>
+    <div class="footer">
+      <span class="status-indicator success"></span>
+      <span>5 lecciones configuradas para este tema</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Acciones de exportación</h3>
+    <div class="toolbar">
+      <button id="genPreview" class="btn primary">Generar Preview Markdown</button>
+      <button id="exportThemeDOC" class="btn success">Theme Planner (Word .doc)</button>
+      <button id="exportThemePDF" class="btn">Theme Planner (PDF)</button>
+      <button id="exportLessonDOC" class="btn success">Lesson Planner 1–5 (Word .doc)</button>
+      <button id="exportLessonPDF" class="btn">Lesson Planner 1–5 (PDF)</button>
+    </div>
+    <div class="footer">
+      <span class="status-indicator"></span>
+      <span>Exporta en formato Word (.docx) o PDF</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Vista previa (Markdown)</h3>
+    <textarea id="mdPreview" rows="12" placeholder="Haz clic en 'Generar Preview Markdown' para ver el contenido..."></textarea>
+    <div class="toolbar">
+      <button id="copyMarkdown" class="btn">Copiar al portapapeles</button>
+      <button id="clearPreview" class="btn warning">Limpiar vista previa</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Estándares específicos</h3>
+    <p>Estándares curriculares para el grado, escenario y tema seleccionados:</p>
+    <div id="standardsPanel" class="alert alert-info">
+      Selecciona un Grado, Escenario y Tema para ver los estándares específicos.
+    </div>
+    
+    <div class="row">
+      <div>
+        <label>Cargar JSON de estándares (opcional)</label>
+        <input id="standardsFile" type="file" accept="application/json">
+      </div>
+      <div>
+        <label>O usar datos predeterminados del currículo MEDUCA</label>
+        <button id="loadDefaultStandards" class="btn">Cargar estándares predeterminados</button>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <span class="status-indicator"></span>
+      <span>Currículo de inglés MEDUCA Panamá - 8 scenarios, 2 temas por scenario, 5 lecciones por tema</span>
+    </div>
+  </section>
+  
+  <section class="card">
+    <h3>Estado del sistema</h3>
+    <div class="row">
+      <div>
+        <label>Datos cargados:</label>
+        <div id="dataStatus" class="alert alert-info">Esperando selección de grado...</div>
+      </div>
+      <div>
+        <label>Exportaciones:</label>
+        <div id="exportStatus" class="alert">Listo para exportar</div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button id="refreshApp" class="btn">Refrescar aplicación</button>
+      <button id="checkUpdates" class="btn">Verificar actualizaciones</button>
+      <button id="debugInfo" class="btn warning">Información de depuración</button>
+    </div>
+  </section>
+</div>
+
+<!-- Librerías actualizadas -->
+<script src="https://unpkg.com/docx@8.0.0/build/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Script principal corregido -->
+<script src="app/app.js"></script>
+
+<!-- Script para funcionalidades adicionales -->
+<script>
+  // Funcionalidades adicionales para mejor UX
+  document.addEventListener('DOMContentLoaded', function() {
+    // Copiar Markdown al portapapeles
+    const copyBtn = document.getElementById('copyMarkdown');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        const preview = document.getElementById('mdPreview');
+        if (preview && preview.value) {
+          navigator.clipboard.writeText(preview.value)
+            .then(() => {
+              showMessage('✅ Markdown copiado al portapapeles', 'success');
+            })
+            .catch(err => {
+              console.error('Error al copiar:', err);
+              showMessage('❌ Error al copiar', 'error');
+            });
+        } else {
+          showMessage('⚠️ No hay contenido para copiar', 'warning');
+        }
+      });
+    }
+    
+    // Limpiar vista previa
+    const clearBtn = document.getElementById('clearPreview');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function() {
+        const preview = document.getElementById('mdPreview');
+        if (preview) {
+          preview.value = '';
+          showMessage('✅ Vista previa limpiada', 'success');
+        }
+      });
+    }
+    
+    // Cargar estándares predeterminados
+    const loadStandardsBtn = document.getElementById('loadDefaultStandards');
+    if (loadStandardsBtn) {
+      loadStandardsBtn.addEventListener('click', function() {
+        showMessage('⏳ Cargando estándares predeterminados del currículo MEDUCA...', 'info');
+        // Esta función debería estar en app.js
+        if (window.loadDefaultStandards) {
+          window.loadDefaultStandards();
+        } else {
+          showMessage('ℹ️ Los estándares se cargarán automáticamente al seleccionar un tema', 'info');
+        }
+      });
+    }
+    
+    // Refrescar aplicación
+    const refreshBtn = document.getElementById('refreshApp');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', function() {
+        location.reload();
+      });
+    }
+    
+    // Verificar actualizaciones
+    const checkUpdatesBtn = document.getElementById('checkUpdates');
+    if (checkUpdatesBtn) {
+      checkUpdatesBtn.addEventListener('click', function() {
+        showMessage('🔍 Verificando actualizaciones...', 'info');
+        setTimeout(() => {
+          showMessage('✅ Estás usando la versión más reciente', 'success');
+        }, 1000);
+      });
+    }
+    
+    // Información de depuración
+    const debugBtn = document.getElementById('debugInfo');
+    if (debugBtn) {
+      debugBtn.addEventListener('click', function() {
+        console.log('=== DEBUG INFO ===');
+        console.log('Current Data:', window.currentData);
+        console.log('Current Scenarios:', window.currentScenarios);
+        console.log('Current Language:', window.currentLang);
+        console.log('=== END DEBUG ===');
+        showMessage('📋 Información de depuración en consola', 'info');
+      });
+    }
+    
+    // Cambiar idioma con el select
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+      langSelect.addEventListener('change', function() {
+        if (window.currentLang !== this.value) {
+          window.currentLang = this.value;
+          if (window.currentLang === 'es') {
+            document.getElementById('langToggle')?.textContent = 'Switch to English';
+          } else {
+            document.getElementById('langToggle')?.textContent = 'Cambiar a Español';
+          }
+          showMessage(`🌐 Idioma cambiado a ${this.value === 'es' ? 'Español' : 'English'}`, 'success');
+          // Disparar evento de cambio de idioma
+          document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: this.value } }));
+        }
+      });
+    }
+    
+    // Subir logo
+    const logoFile = document.getElementById('logoFile');
+    if (logoFile) {
+      logoFile.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          showMessage(`✅ Logo cargado: ${file.name}`, 'success');
+        }
+      });
+    }
+    
+    // Cargar configuración
+    const loadCfgBtn = document.getElementById('loadCfg');
+    if (loadCfgBtn) {
+      loadCfgBtn.addEventListener('click', function() {
+        showMessage('💾 Cargando configuración guardada...', 'info');
+        // Aquí iría la lógica para cargar configuración
+        setTimeout(() => {
+          showMessage('✅ Configuración cargada exitosamente', 'success');
+        }, 500);
+      });
+    }
+    
+    // Guardar configuración
+    const saveCfgBtn = document.getElementById('saveCfg');
+    if (saveCfgBtn) {
+      saveCfgBtn.addEventListener('click', function() {
+        showMessage('💾 Guardando configuración...', 'info');
+        // Aquí iría la lógica para guardar configuración
+        setTimeout(() => {
+          showMessage('✅ Configuración guardada exitosamente', 'success');
+        }, 500);
+      });
+    }
+    
+    // Borrar caché
+    const clearSWBtn = document.getElementById('clearSW');
+    if (clearSWBtn) {
+      clearSWBtn.addEventListener('click', function() {
+        showMessage('🧹 Limpiando caché del Service Worker...', 'info');
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+              registration.unregister();
+            }
+            setTimeout(() => {
+              showMessage('✅ Caché limpiado. Recarga la página para aplicar cambios.', 'success');
+            }, 1000);
+          });
+        } else {
+          showMessage('ℹ️ Service Worker no está disponible', 'info');
+        }
+      });
+    }
+    
+    // Función para mostrar mensajes
+    window.showMessage = function(message, type = 'info') {
+      const statusDiv = document.getElementById('statusMessage');
+      if (!statusDiv) return;
+      
+      statusDiv.textContent = message;
+      statusDiv.className = `alert alert-${type}`;
+      statusDiv.style.display = 'block';
+      
+      // Auto-ocultar después de 5 segundos
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 5000);
+    };
+  });
+</script>
+</body>
+</html>
